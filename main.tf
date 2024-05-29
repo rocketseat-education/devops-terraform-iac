@@ -7,9 +7,9 @@ terraform {
   }
 
   backend "s3" {
-    bucket  = "rocketseat-iac"
-    key     = "state/terraform.tfstate"
-    region  = "us-east-2"
+    bucket = "rocketseat-iac"
+    key    = "state/terraform.tfstate"
+    region = "us-east-2"
   }
 }
 
