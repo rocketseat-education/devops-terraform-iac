@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  run-terraform:
+    name: 'Run terraform'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-2
+          role-to-assume: ''
+
+      - name: Setup terraform
+        uses: 'hashicorp/setup-terraform@v3'
+        with:
+          terraform_version: 1.8.4
+
+      - name: Terraform init
+        run: terraform init
+
+      - name: Terraform format
+        run: terraform fmt -check
+      
+      - name: Terraform plan
+        run: terraform plan
+
+      - name: Terraform apply
+        run: terraform apply -auto-approve
